@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://jont:mjeenyus153@ds125113.mlab.com:25113/url-shortener')
+mongoose.connect('mongodb://jont:pass@ds125113.mlab.com:25113/url-shortener')
 mongoose.Promise = global.Promise;
 
 var index = require('./routes/index');
