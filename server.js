@@ -3,10 +3,19 @@
 /**
  * Module dependencies.
  */
+const dotenv = require('dotenv').config({path: __dirname + '/variables.env'})
+const mongoose = require('mongoose');
 
-var app = require('../app');
+mongoose.connect(process.env.DB_STRING, { useMongoClient: true })
+mongoose.Promise = global.Promise;
+
+require('./models/urlSchema');
+
+var app = require('./app');
 var debug = require('debug')('urlshortener:server');
 var http = require('http');
+
+// require('../models/urlSchema')
 
 /**
  * Get port from environment and store in Express.
