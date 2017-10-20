@@ -3,10 +3,11 @@ var router = express.Router();
 
 var Url = require('../models/urlSchema');
 
-const testdb = async(req, res) => {
-  const url = await new Url({original_url: 'test'}).save();
-
-  console.log(url);
+function testdb(req, res) {
+  const url = new Url({original_url: req.params.test});
+  url.save(function(err, data) {
+    if (err) console.log(err);
+  });
   res.send('wow');
   
 }

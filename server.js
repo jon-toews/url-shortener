@@ -6,7 +6,9 @@
 const dotenv = require('dotenv').config({path: __dirname + '/variables.env'})
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.DB_STRING, { useMongoClient: true })
+require('./encode.js');
+
+mongoose.connect(process.env.DB_STRING)
 mongoose.Promise = global.Promise;
 
 require('./models/urlSchema');
