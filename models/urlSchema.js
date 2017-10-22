@@ -1,22 +1,22 @@
-var mongoose = require('mongoose');
-var urlEncode = require('../encode');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const urlEncode = require('../encode');
+const Schema = mongoose.Schema;
 
-var CounterSchema = Schema({
+const CounterSchema = Schema({
     _id: {type: String, required: true},
     seq: {type: Number, default: 0}
 })
 
-var counter = mongoose.model('counter', CounterSchema);
+const counter = mongoose.model('counter', CounterSchema);
 
-var urlSchema = new Schema({
+const urlSchema = new Schema({
     original_url: String,
     seq_id: Number,
     short_url: String
 });
 
 urlSchema.pre ('save', function(next) {
-    var doc = this;
+    const doc = this;
     counter.findByIdAndUpdate({_id: 'url_counter'}, {$inc: {seq: 1} }, function(err, counter) {
         if(err) return next(err);
         console.log(counter);
@@ -25,7 +25,5 @@ urlSchema.pre ('save', function(next) {
         next();
     })
 })
-
-
 
 module.exports = mongoose.model('url', urlSchema)

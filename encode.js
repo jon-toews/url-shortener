@@ -3,6 +3,7 @@
 const alpha = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 const base = alpha.length
 
+// encode base 10 id into base 62 string
 module.exports.encode = (num) => {
     let output = [];
 
@@ -16,6 +17,7 @@ module.exports.encode = (num) => {
     return output.map(i => alpha[i]).join('');
 }
 
+// decode base 62 string into base 10 id
 module.exports.decode = (str) => {
     const arr = str.split('').map((char) => {
         return alpha.indexOf(char);

@@ -6,31 +6,27 @@
 const dotenv = require('dotenv').config({path: __dirname + '/variables.env'})
 const mongoose = require('mongoose');
 
-require('./encode.js');
-
 mongoose.connect(process.env.DB_STRING)
 mongoose.Promise = global.Promise;
 
 require('./models/urlSchema');
 
-var app = require('./app');
-var debug = require('debug')('urlshortener:server');
-var http = require('http');
-
-// require('../models/urlSchema')
+const app = require('./app');
+const debug = require('debug')('urlshortener:server');
+const http = require('http');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+const server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -45,7 +41,7 @@ server.on('listening', onListening);
  */
 
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+  const port = parseInt(val, 10);
 
   if (isNaN(port)) {
     // named pipe
@@ -69,7 +65,7 @@ function onError(error) {
     throw error;
   }
 
-  var bind = typeof port === 'string'
+  const bind = typeof port === 'string'
     ? 'Pipe ' + port
     : 'Port ' + port;
 
@@ -93,8 +89,8 @@ function onError(error) {
  */
 
 function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
+  const addr = server.address();
+  const bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
